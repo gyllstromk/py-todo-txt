@@ -184,9 +184,11 @@ def mark_priority(args):
 def mark_done(args):
   def update(t):
     if t.is_completed:
-        raise Exception('Already marked completed.')
-    print('Marked completed: "%s"' % t.text)
-    return t._replace(is_completed=True)
+        print('Already marked completed: "%s"' % t.text)
+        return t
+    else:
+        print('Marked completed: "%s"' % t.text)
+        return t._replace(is_completed=True)
 
   return update_all(args.number, update)
 
@@ -299,4 +301,5 @@ if __name__ == '__main__':
       print(e)
       sys.exit(1)
   else:
-    ls(namedtuple('args', 'a w')(None, None))
+    # lsa not that useful
+    ls(namedtuple('args', 'a w all')(None, None, False))
