@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 
 import argparse
-from collections import defaultdict, namedtuple
 import configparser
 import datetime
-from enum import Enum
 import os
 import shutil
+
+from collections import defaultdict, namedtuple
+from enum import Enum
 
 
 ACTION_STATE_MARKER = '!'
@@ -94,13 +95,14 @@ def updatetodo(number, func):
 
 
 def printtodos(filter_, show_action_state, suppress_number):
-  todos = list(readtodos(filter_))
-  if not todos:
-      return
-  digits = len(str(todos[-1].number))
-  for todo in todos:
-      n = str(todo.number).zfill(digits) if not suppress_number else '-'
-      print(n, todo.rawstr(not show_action_state))
+    todos = list(readtodos(filter_))
+    if not todos:
+        return
+    digits = len(str(todos[-1].number))
+    for todo in reversed(todos):
+        n = str(todo.number).zfill(digits) if not suppress_number else '-'
+        line = f"{n} {todo.rawstr(not show_action_state)}"
+        print(line)
 
 
 def lsa(args):
