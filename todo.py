@@ -253,7 +253,7 @@ if __name__ == '__main__':
   sub_parser.set_defaults(func=add_silent)
 
   sub_parser = subparsers.add_parser('list', aliases=['ls'])
-  sub_parser.add_argument('--all', action='store_true')
+  sub_parser.add_argument('--all', action='store_true', default=True)
   sub_parser.add_argument('--waiting', action='store_true')
   sub_parser.add_argument('--export', action='store_true')
   sub_parser.add_argument('project', nargs='*')
@@ -302,4 +302,4 @@ if __name__ == '__main__':
       sys.exit(1)
   else:
     # lsa not that useful
-    ls(namedtuple('args', 'a w all')(None, None, False))
+    ls(namedtuple('args', 'a w all')(None, None, True))
