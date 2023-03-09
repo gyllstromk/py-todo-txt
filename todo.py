@@ -112,24 +112,24 @@ def lsa(args):
 
 def lp(args):
     def filter_(x):
-        return len(x.projects) and not x.is_completed
+        return len(x.tags) and not x.is_completed
 
     todos = list(readtodos(filter_))
     projects = defaultdict(list)
     for t in todos:
-        for p in t.projects:
+        for p in t.tags:
             projects[p].append(t)
 
     if not todos:
-            return
+        return
     digits = len(str(todos[-1].number))
     for i, (p, tod) in enumerate(projects.items()):
         print('#', p)
         for todo in tod:
-                n = str(todo.number).zfill(digits)
-                print('-', n, todo.rawstr())
+            n = str(todo.number).zfill(digits)
+            print('-', n, todo.rawstr())
         if i < len(projects) - 1:
-                print()
+            print()
 
 completed_filter = lambda x: not x.is_completed
 
